@@ -1,0 +1,184 @@
+body {
+  background-size: cover;
+  background-attachment: fixed;
+  margin-top: 15vh;
+  height: 100vh;
+}
+
+nav {
+  height: 15vh;
+  background-color: white;
+}
+
+nav ul li a {
+  color: black;
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+  padding-top: 20px;
+  padding-right: 15px;
+}
+
+.navbar-brand img {
+  height: 10vh;
+}
+
+.navbar-brand {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+#registeration {
+  border: 2px solid black;
+  background: linear-gradient(to right, #6a1b9a, #512da8);
+  width: 130px;
+  transform: translateX(-1);
+  transform: translateY(-1);
+  transition: background 0.5s ease;
+  transition: border 0.5s ease;
+  transition: box-shadow 0.5s ease;
+  box-shadow: 5px 5px 5px black;
+}
+
+#registeration:hover {
+  background: #9781a0;
+  border: none;
+  box-shadow: none;
+}
+
+#registeration a {
+  color: white;
+  font-family: garamond;
+}
+
+.news-scroll-container {
+  background: linear-gradient(135deg, #602e76, #404040);
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 15vh;
+  color: white;
+  font-weight: bold;
+  overflow: hidden;
+  position: relative;
+}
+
+.scrolling-wrapper {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+}
+
+#scrolling-news {
+  display: inline-block;
+  padding-left: 100vw;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.footer_logo {
+  height: 9.5vh;
+}
+
+footer .container-fluid .row {
+  background-color: #e8e8e8;
+  border-top: 5px solid gray;
+}
+
+footer .container-fluid .row h4 {
+  font-family: garamond;
+  color: rgb(80, 80, 80);
+  font-weight: bolder;
+}
+
+footer .container-fluid .row p,
+.footer_nav {
+  font-family: garamond;
+  color: rgb(90, 90, 90);
+}
+
+footer .container-fluid .row .registeration {
+  border: 2px solid black;
+  background: linear-gradient(to right, #6a1b9a, #512da8);
+  width: 130px;
+  transition: background 0.5s ease;
+  transition: border 0.5s ease;
+  transition: box-shadow 0.5s ease;
+  box-shadow: 5px 5px 5px black;
+  height: 60px;
+}
+
+footer .container-fluid .row .registeration:hover {
+  background: #9781a0;
+  border: none;
+  box-shadow: none;
+}
+
+footer .container-fluid .row .registeration a:hover {
+  text-decoration: none;
+}
+
+.main {
+  padding: 2vw;
+  background: none;
+}
+
+.main .row {
+  padding: 2vw;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+#upcoming_events,
+#pending,
+#notifications {
+  background: white;
+  padding: 1vw;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px rgb(136, 136, 136);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background 0.5s linear ease;
+  transition: transform 0.5s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main .row .col-12 {
+  margin-top: 1vh;
+}
+
+.glass {
+  border-radius: 10px;
+
+  padding: 1vw;
+  background: rgba(255, 255, 255, 0.7);
+  flex-grow: 1;
+}
+
+#upcoming_events:hover {
+  transform: scale(1.05);
+  background: url(events.jpg);
+  background-size: cover;
+}
+
+#pending:hover {
+  transform: scale(1.05);
+  background: url(pending.jpg);
+  background-size: cover;
+}
+
+#notifications:hover {
+  transform: scale(1.05);
+  background: url(notify.jpg);
+  background-size: cover;
+}

@@ -1,0 +1,67 @@
+nav {
+  height: 15vh;
+  background-color: white;
+}
+
+nav ul li a {
+  color: black;
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+  padding-top: 20px;
+  padding-right: 15px;
+}
+
+.navbar-brand img {
+  height: 9.5vh;
+}
+
+.navbar-brand {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.footer_logo {
+  height: 9.5vh;
+}
+
+footer {
+  width: 100%;
+}
+
+footer .container-fluid .row {
+  background-color: #e8e8e8;
+}
+
+footer .container-fluid .row h4 {
+  font-family: garamond;
+  color: rgb(80, 80, 80);
+  font-weight: bolder;
+}
+
+footer .container-fluid .row p,
+.footer_nav {
+  font-family: garamond;
+  color: rgb(90, 90, 90);
+}
+
+footer .container-fluid .row .registeration {
+  border: 2px solid black;
+  background: linear-gradient(to right, #6a1b9a, #512da8);
+  width: 130px;
+  transition: background 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
+  box-shadow: 5px 5px 5px black;
+  height: 60px;
+}
+
+footer .container-fluid .row .registeration:hover {
+  background: #9781a0;
+  border: none;
+  box-shadow: none;
+}
+
+footer .container-fluid .row .registeration a:hover {
+  text-decoration: none;
+}

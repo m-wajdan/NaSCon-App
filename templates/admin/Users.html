@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Management - Admin Panel</title>
+
+    <!-- Fonts and Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin_css/user.css') }}"
+    />
+
+    <!-- Tailwind (Optional for layout utilities) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>User Management</h1>
+      <nav>
+        <a
+          href="{{ url_for('admin_dashboard') }}"
+          class="text-blue-600 hover:underline"
+          >Dashboard</a
+        >
+        <a href="{{ url_for('Users') }}" class="text-blue-600 hover:underline"
+          >Users</a
+        >
+        <a
+          href="{{ url_for('sponsors_admin') }}"
+          class="text-blue-600 hover:underline"
+          >Sponsors</a
+        >
+        <a
+          href="{{ url_for('organizers') }}"
+          class="text-blue-600 hover:underline"
+          >Organizers</a
+        >
+        <a href="{{ url_for('judges') }}" class="text-blue-600 hover:underline"
+          >Judges</a
+        >
+        <a href="{{ url_for('venues') }}" class="text-blue-600 hover:underline"
+          >Venues</a
+        >
+        <a
+          href="{{ url_for('events_admin') }}"
+          class="text-blue-600 hover:underline"
+          >Events</a
+        >
+        <a
+          href="{{ url_for('payments') }}"
+          class="text-blue-600 hover:underline"
+          >Payments</a
+        >
+        <a
+          href="{{ url_for('evaluations') }}"
+          class="text-blue-600 hover:underline"
+          >Evaluations</a
+        >
+        <a
+          href="{{ url_for('accomodation') }}"
+          class="text-blue-600 hover:underline"
+          >Accommodations</a
+        >
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4">
+      <!-- User Table -->
+      <section class="mb-10">
+        <h2>Users List</h2>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Accommodation</th>
+                <th>Event</th>
+                <th class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for participant in participants %}
+              <tr>
+                <td>{{ participant.user_name }}</td>
+                <!-- user_name -->
+                <td>{{ participant.email }}</td>
+                <!-- email -->
+                <td>{{ participant.phone }}</td>
+                <!-- phone -->
+                <td>{{ participant.accommodation_package }}</td>
+                <!-- accommodation_package -->
+                <td>{{ participant.event_name }}</td>
+                <!-- event_name -->
+                <td class="text-center">
+                  <button class="edit" title="Edit">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="delete" title="Delete">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Add/Edit User Form -->
+    </main>
+
+    <!-- Footer -->
+    <footer>&copy; 2024 DB_Project Admin Panel</footer>
+  </body>
+</html>

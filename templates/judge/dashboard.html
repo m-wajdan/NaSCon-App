@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NaSCon'25 - Judge Dashboard</title>
+
+    <!-- Bootstrap and Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/judge_css/dashboard.css') }}"
+    />
+
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        padding-top: 70px;
+        background-color: #f2f2f2;
+      }
+
+      .navbar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-nav .nav-link {
+        font-weight: bold;
+        color: #6a1b9a !important;
+      }
+
+      .header-section {
+        text-align: center;
+        padding: 30px 10px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+
+      .header-section h1 {
+        font-weight: 700;
+        color: #6a1b9a;
+      }
+
+      .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .card h3 {
+        color: #6a1b9a;
+        font-weight: bold;
+      }
+
+      .card ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .card ul li {
+        padding: 5px 0;
+      }
+
+      .btn-purple {
+        background-color: #6a1b9a;
+        color: white;
+        font-weight: bold;
+      }
+
+      footer {
+        background-color: #ffffff;
+        color: #6a1b9a;
+        font-weight: bold;
+        padding: 15px 0;
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+      <a class="navbar-brand" href="{{ url_for('judge_dashboard') }}">
+        <img
+          src="{{ url_for('static', filename='assets/nascon_logo.png') }}"
+          alt="NaSCon Logo"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('judge_dashboard') }}"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('judge_events') }}"
+              >My Events</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('judge_results') }}"
+              >Results</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="header-section">
+      <h1>Welcome to NaSCon'25 - Judge Dashboard</h1>
+      <p class="text-muted">
+        Manage your events, evaluations and stay updated.
+      </p>
+    </div>
+
+    <!-- Main Dashboard Cards -->
+    <div class="container-fluid main">
+      <div class="row">
+        <!-- Upcoming Events -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card p-4">
+            <h3>Upcoming Events</h3>
+            <ul>
+              <li>Event A - 10 May 2025, 10:00 AM</li>
+              <li>Event B - 11 May 2025, 02:00 PM</li>
+            </ul>
+            <a href="{{ url_for('judge_events') }}" class="btn btn-purple mt-3"
+              >View Events</a
+            >
+          </div>
+        </div>
+
+        <!-- Pending Evaluations -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card p-4">
+            <h3>Pending Evaluations</h3>
+            <ul>
+              <li>Participant X - Event A</li>
+              <li>Participant Y - Event B</li>
+            </ul>
+            <a
+              href="{{ url_for('judge_events') }}"
+              class="btn btn-purple mt-3"
+              >Evaluate Now</a
+            >
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card p-4">
+            <h3>Notifications</h3>
+            <ul>
+              <li>Reminder: Submit evaluations for Event A by 9 May</li>
+              <li>New messages from Event Coordinator</li>
+            </ul>
+            <a href="{{ url_for('judge_results') }}" class="btn btn-purple mt-3"
+              >View Results</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">© Copyright NaSCon '25 - Judge</footer>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>NaSCon'25</title>
+
+    <!-- Bootstrap & Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/header-footer.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/register_event.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+      <a class="navbar-brand" href="{{ url_for('user_dashboard') }}">
+        <img
+          src="{{ url_for('static', filename='assets/nascon_logo.png') }}"
+          class="footer_logo"
+        />
+      </a>
+      <button
+        class="btn navbar-toggler navbar-toggler-icon"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      ></button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="ml-auto navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('events') }}">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sponsors') }}">Sponsors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('aboutus') }}">About Us</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Page Content Here -->
+    <div class="container mt-5 pt-5">
+      <h2>Event Registration</h2>
+      <div class="card p-4 mt-3">
+        <h4>{{ event.name }}</h4>
+        <p><strong>Date:</strong> {{ event.event_date }}</p>
+        <p><strong>Location:</strong> {{ event.location }}</p>
+        <p><strong>Fee:</strong> Rs. {{ event.registration_fees }}</p>
+        <p style = "color : red"><strong>Select your accomodation package</strong></p>
+        <select style="height: 50px;" name="accomodation_pkg" id="accomodation_select" onchange="updateRoomNo()">
+          <option value="none">None</option>
+          {% for pkg in accomodation_packages %}
+            <option value="{{ pkg.room_no }}">{{ pkg.package }}</option>
+          {% endfor %}
+        </select>
+        <input type="hidden" name="room_no" id="selected_room_no">
+        <hr />
+        <h5>Bank Details</h5>
+        <p style = 'color : red'><strong>Note : Only confirm payment after paying the amount in the bank</p>
+        <p><strong>Account Title:</strong> NaSCon Payments</p>
+        <p><strong>IBAN:</strong> PK00 HABB 0000 0000 0000 0000</p>
+        <p><strong>Bank:</strong> Habib Bank Limited</p>
+
+       <!-- Registration Form -->
+        
+        <form id="registrationForm">
+          <input type="hidden" name="action" value="register" />
+          <input type="hidden" name="user_id" value="{{ session['user_id'] }}" />
+          <button type="button" class="btn btn-primary" id="registerBtn">
+            Confirm Registration
+          </button>
+        </form>
+
+        <!-- Payment Form -->
+        <form id="paymentForm">
+          <input type="hidden" name="action" value="pay" />
+          <input type="hidden" name="user_id" value="{{ session['user_id'] }}" />
+          <button type="button" class="btn btn-success" id="paymentBtn">
+            Confirm Payment
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container-fluid">
+        <div class="row" style="padding-left: 2vw; padding-top: 2vw">
+          <img
+            src="{{ url_for('static', filename='assets/nascon_logo.png') }}"
+            class="footer_logo"
+          />
+        </div>
+        <div class="row" style="padding: 2vw">
+          <div class="col-md-3 col-lg-3 col-sm-12">
+            <h4>Reach Out</h4>
+            <p>
+              We'd be glad to hear from you!<br />
+              info@nascon.com.pk<br />
+              051-111-128-128<br /><br />
+              For any website related query:<br />
+              web-support@nascon.com.pk
+            </p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12">
+            <h4>Navigate</h4>
+            <a class="footer_nav" href="https://nascon.com.pk/">Home</a><br />
+            <a class="footer_nav" href="https://nascon.com.pk/events">Events</a
+            ><br />
+            <a class="footer_nav" href="https://nascon.com.pk/sponsors"
+              >Sponsors</a
+            ><br />
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12">
+            <h4>Useful Links</h4>
+            <a class="footer_nav" href="https://nu.edu.pk/"
+              >FAST-NUCES Website</a
+            ><br />
+            <a class="footer_nav" href="https://goto.now/MRnDC"
+              >Information Booklet</a
+            ><br />
+            <a
+              class="footer_nav"
+              href="https://docs.google.com/forms/d/1UdbjB9jllCWgcDSQyP8-0dNkfI6ePAoA_flW_4fnDKQ/edit"
+              >Become a Community Partner</a
+            ><br />
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12">
+            <h4>Become a Sponsor</h4>
+            <p>
+              To become an official sponsor for NaSCon'25, please give us some
+              information and we will reach out to you.
+            </p>
+            <button class="registeration">
+              <a
+                href="{{ url_for('become_sponsor') }}"
+                style="color: white; font-family: garamond"
+                >Become a <br />Sponsor</a
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      function updateRoomNo() {
+        const selected = document.getElementById("accomodation_select").value;
+        document.getElementById("selected_room_no").value = selected === "none" ? "" : selected;
+      }
+    
+      document.addEventListener("DOMContentLoaded", function () {
+        const registerBtn = document.getElementById("registerBtn");
+        const paymentBtn = document.getElementById("paymentBtn");
+    
+        // Set listener on accommodation dropdown
+        document.getElementById("accomodation_select").addEventListener("change", updateRoomNo);
+    
+        registerBtn.addEventListener("click", function () {
+          const userId = document.querySelector("#registrationForm input[name='user_id']").value;
+          const roomNo = document.getElementById("selected_room_no").value;
+    
+          const bodyData = `action=register&user_id=${userId}` + (roomNo ? `&room_no=${roomNo}` : "");
+    
+          fetch("{{ url_for('register_event', event_id=event.event_id) }}", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: bodyData,
+          });
+    
+          registerBtn.disabled = true;
+          registerBtn.textContent = "Registered";
+          registerBtn.classList.remove("btn-primary");
+          registerBtn.classList.add("btn-secondary");
+        });
+    
+        paymentBtn.addEventListener("click", function () {
+          const userId = document.querySelector("#paymentForm input[name='user_id']").value;
+    
+          fetch("{{ url_for('register_event', event_id=event.event_id) }}", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `action=pay&user_id=${userId}`,
+          });
+    
+          paymentBtn.disabled = true;
+          paymentBtn.textContent = "Paid";
+          paymentBtn.classList.remove("btn-success");
+          paymentBtn.classList.add("btn-secondary");
+        });
+      });
+    </script>
+    
+  </body>
+
+</html>

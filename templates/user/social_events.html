@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>NaSCon'25</title>
+
+    <!-- Bootstrap & Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/header-footer.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/events.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+      <a class="navbar-brand" href="{{ url_for('user_dashboard') }}">
+        <img
+          src="{{ url_for('static', filename='assets/nascon_logo.png') }}"
+          class="footer_logo"
+        />
+      </a>
+      <button
+        class="btn navbar-toggler navbar-toggler-icon"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      ></button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="ml-auto navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('events') }}">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sponsors') }}">Sponsors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('aboutus') }}">About Us</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h2 class="text-center">Explore Our Events</h2>
+
+      <div class="event-categories">
+        <a href="{{ url_for('events') }}">Computing</a>
+        <a href="{{ url_for('engineering_events') }}">Engineering</a>
+        <a href="{{ url_for('social_events') }}" class="active">Social</a>
+        <a href="{{ url_for('sports_events') }}">Sports</a>
+      </div>
+
+      <div class="events-container">
+        {% for event in events %}
+        <div class="event-card">
+          <div class="event-title">{{ event.event_name }}</div>
+          <div class="event-details">
+            <strong>Date:</strong> {{ event.event_date }}
+          </div>
+          <div class="event-details">
+            <strong>Time:</strong> {{ event.start_time }} - {{ event.end_time }}
+          </div>
+          <div class="event-details">
+            <strong>Rules:</strong> {{ event.rules }}
+          </div>
+          <div class="event-details">
+            <strong>Fee:</strong> Rs.{{ event.registration_fees }}
+          </div>
+          <div class="event-details">
+            <strong>Max Participants:</strong> {{ event.max_participants }}
+          </div>
+          <div class="event-details">
+            <strong>Venue:</strong> {{ event.venue_name }}
+          </div>
+          <div class="event-details">
+            <strong>Organized by:</strong> {{ event.society }} ({{
+            event.department }})
+          </div>
+          <div class="event-details">
+            <strong>Head:</strong> {{ event.head }}
+          </div>
+          <a
+            href="{{ url_for('register_event', event_id=event.event_id) }}"
+            class="register-btn"
+            >Register</a
+          >
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <footer>
+      <div class="container-fluid">
+        <div class="row" style="padding-left: 2vw; padding-top: 2vw">
+          <img
+            src="{{ url_for('static', filename='assets/nascon_logo.png') }}"
+            class="footer_logo"
+          />
+        </div>
+        <div class="row" style="padding: 2vw">
+          <div class="col-md-3 col-lg-3 col-sm-12">
+            <h4>Reach Out</h4>
+            <p>
+              We'd be glad to hear from you!<br />
+              info@nascon.com.pk<br />
+              051-111-128-128<br /><br />
+              For any website related query:<br />
+              web-support@nascon.com.pk
+            </p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12">
+            <h4>Navigate</h4>
+            <a class="footer_nav" href="https://nascon.com.pk/">Home</a><br />
+            <a class="footer_nav" href="https://nascon.com.pk/events">Events</a
+            ><br />
+            <a class="footer_nav" href="https://nascon.com.pk/sponsors"
+              >Sponsors</a
+            ><br />
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12">
+            <h4>Useful Links</h4>
+            <a class="footer_nav" href="https://nu.edu.pk/"
+              >FAST-NUCES Website</a
+            ><br />
+            <a class="footer_nav" href="https://goto.now/MRnDC"
+              >Information Booklet</a
+            ><br />
+            <a
+              class="footer_nav"
+              href="https://docs.google.com/forms/d/1UdbjB9jllCWgcDSQyP8-0dNkfI6ePAoA_flW_4fnDKQ/edit"
+              >Become a Community Partner</a
+            ><br />
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12">
+            <h4>Become a Sponsor</h4>
+            <p>
+              To become an official sponsor for NaSCon'25, please give us some
+              information and we will reach out to you.
+            </p>
+            <button class="registeration">
+              <a
+                href="{{ url_for('become_sponsor') }}"
+                style="color: white; font-family: garamond"
+                >Become a <br />Sponsor</a
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evaluation Management - Admin - DB_Project</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin_css/evaluation.css') }}"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-inter min-h-screen flex flex-col">
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+      <h1 class="text-2xl font-semibold text-gray-800">
+        Evaluation Management
+      </h1>
+      <nav class="space-x-4">
+        <a
+          href="{{ url_for('admin_dashboard') }}"
+          class="text-blue-600 hover:underline"
+          >Dashboard</a
+        >
+        <a href="{{ url_for('Users') }}" class="text-blue-600 hover:underline"
+          >Users</a
+        >
+        <a
+          href="{{ url_for('sponsors_admin') }}"
+          class="text-blue-600 hover:underline"
+          >Sponsors</a
+        >
+        <a
+          href="{{ url_for('organizers') }}"
+          class="text-blue-600 hover:underline"
+          >Organizers</a
+        >
+        <a href="{{ url_for('judges') }}" class="text-blue-600 hover:underline"
+          >Judges</a
+        >
+        <a href="{{ url_for('venues') }}" class="text-blue-600 hover:underline"
+          >Venues</a
+        >
+        <a
+          href="{{ url_for('events_admin') }}"
+          class="text-blue-600 hover:underline"
+          >Events</a
+        >
+        <a
+          href="{{ url_for('payments') }}"
+          class="text-blue-600 hover:underline"
+          >Payments</a
+        >
+        <a
+          href="{{ url_for('evaluations') }}"
+          class="text-blue-600 hover:underline"
+          >Evaluations</a
+        >
+        <a
+          href="{{ url_for('accomodation') }}"
+          class="text-blue-600 hover:underline"
+          >Accommodations</a
+        >
+      </nav>
+    </header>
+
+    <main class="flex-grow p-6">
+      {% for event_type, events in grouped_data.items() %}
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4 capitalize">
+          {{ event_type }} Events
+        </h2>
+        <div class="overflow-x-auto bg-white shadow rounded-lg">
+          <table class="min-w-full text-sm text-left">
+            <thead class="bg-gray-200 text-gray-700">
+              <tr>
+                <th class="px-4 py-2">Event Name</th>
+                <th class="px-4 py-2">Total Participants</th>
+                <th class="px-4 py-2">Average Score</th>
+                <th class="px-4 py-2">Winner Name</th>
+                <th class="px-4 py-2">Winner Score</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-600">
+              {% for e in events %}
+              <tr class="border-t">
+                <td class="px-4 py-2 font-medium">{{ e.event_name }}</td>
+                <td class="px-4 py-2">{{ e.total_participants }}</td>
+                <td class="px-4 py-2">{{ e.average_score }}</td>
+                <td class="px-4 py-2">{{ e.winner_name }}</td>
+                <td class="px-4 py-2">{{ e.winner_score }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      {% endfor %}
+    </main>
+
+    <footer class="bg-white shadow p-4 text-center text-gray-600 text-sm">
+      &copy; 2024 DB_Project Admin Panel
+    </footer>
+  </body>
+</html>

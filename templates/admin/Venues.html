@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Venue Management - Admin - DB_Project</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-x..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin_css/venue.css') }}"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-inter min-h-screen flex flex-col">
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+      <h1 class="text-2xl font-semibold text-gray-800">Venue Management</h1>
+      <nav class="space-x-4">
+        <a href="{{ url_for('admin_dashboard') }}" class="text-blue-600 hover:underline">Dashboard</a>
+        <a href="{{ url_for('Users') }}" class="text-blue-600 hover:underline">Users</a>
+        <a href="{{ url_for('sponsors_admin') }}" class="text-blue-600 hover:underline">Sponsors</a>
+        <a href="{{ url_for('organizers') }}" class="text-blue-600 hover:underline">Organizers</a>
+        <a href="{{ url_for('judges') }}" class="text-blue-600 hover:underline">Judges</a>
+        <a href="{{ url_for('venues') }}" class="text-blue-600 hover:underline">Venues</a>
+        <a href="{{ url_for('events_admin') }}" class="text-blue-600 hover:underline">Events</a>
+        <a href="{{ url_for('payments') }}" class="text-blue-600 hover:underline">Payments</a>
+        <a href="{{ url_for('evaluations') }}" class="text-blue-600 hover:underline">Evaluations</a>
+        <a href="{{ url_for('accomodation') }}" class="text-blue-600 hover:underline">Accommodations</a>
+
+      </nav>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4">
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Venues List</h2>
+        <div class="overflow-x-auto bg-white rounded shadow">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Name
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Capacity
+                </th>
+                <th
+                  class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              {% for venue in venues %}
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ venue.name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ venue.capacity }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-2">
+                  <!-- Optional: Add Edit/Delete buttons -->
+                  <button
+                    class="text-indigo-600 hover:text-indigo-900"
+                    title="Edit"
+                    onclick="editVenue('{{ venue.venue_id }}')"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button
+                    class="text-red-600 hover:text-red-900"
+                    title="Delete"
+                    onclick="deleteVenue('{{ venue.venue_id }}')"
+                  >
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Add / Edit Venue</h2>
+        <form
+          class="bg-white p-6 rounded shadow max-w-3xl"
+          id="venueForm"
+          method="POST"
+          action="{{ url_for('venues') }}"
+          novalidate
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              />
+            </div>
+            <div>
+              <label
+                for="capacity"
+                class="block text-sm font-medium text-gray-700"
+                >Capacity</label
+              >
+              <input
+                type="number"
+                id="capacity"
+                name="capacity"
+                min="1"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              />
+            </div>
+          </div>
+          <div class="mt-6 flex space-x-4">
+            <button
+              type="submit"
+              class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+            >
+              Save
+            </button>
+            <button
+              type="reset"
+              class="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400 transition"
+            >
+              Reset
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="bg-white shadow p-4 text-center text-gray-600 text-sm">
+      &copy; 2024 DB_Project Admin Panel
+    </footer>
+  </body>
+</html>

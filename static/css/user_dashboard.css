@@ -1,0 +1,60 @@
+.nascon-banner {
+  margin-top: 15vh;
+  position: relative;
+  height: 100vh;
+  background: url("../assets/banner_image.jpeg") no-repeat center center/cover;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.nascon-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: inherit;
+  filter: blur(6px) brightness(0.6);
+  z-index: 1;
+}
+
+.nascon-banner .banner-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.nascon-title {
+  font-size: 100px;
+  font-weight: 700;
+  color: white;
+}
+
+.nascon-subtitle {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: white;
+  width: 100%;
+}
+
+.nascon-btn {
+  font-size: 20px;
+  padding: 12px 30px;
+  background-color: #007bff;
+  border: none;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.nascon-btn:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+  color: white;
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NaSCon'25 - Judge Dashboard</title>
+
+    <!-- Bootstrap and Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/judge_css/evaluate.css') }}"
+    />
+
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        padding-top: 70px;
+        background-color: #f2f2f2;
+      }
+
+      .navbar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-nav .nav-link {
+        font-weight: bold;
+        color: #6a1b9a !important;
+      }
+
+      .header-section {
+        text-align: center;
+        padding: 30px 10px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+
+      .header-section h1 {
+        font-weight: 700;
+        color: #6a1b9a;
+      }
+
+      .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .card h3 {
+        color: #6a1b9a;
+        font-weight: bold;
+      }
+
+      .card ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .card ul li {
+        padding: 5px 0;
+      }
+
+      .btn-purple {
+        background-color: #6a1b9a;
+        color: white;
+        font-weight: bold;
+      }
+
+      footer {
+        background-color: #ffffff;
+        color: #6a1b9a;
+        font-weight: bold;
+        padding: 15px 0;
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+      <a class="navbar-brand" href="{{ url_for('judge_dashboard') }}">
+        <img
+          src="{{ url_for('static', filename='assets/nascon_logo.png') }}"
+          alt="NaSCon Logo"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('judge_dashboard') }}"
+              >Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('judge_events') }}"
+              >My Events</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('judge_results') }}"
+              >Results</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Section -->
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">
+        Evaluate Participants for {{ event_name }}
+      </h2>
+    
+      <table class="table table-bordered bg-white">
+        <thead class="thead-light">
+          <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Score (0–10)</th>
+            <th>Comments</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in participants %}
+          <tr>
+            <td>{{ p.user_id }}</td>
+            <td>{{ p.name }}</td>
+            <td>
+              {% if not p.already_evaluated %}
+              <form method="POST" action="{{ url_for('judge_events', event_id=event_id) }}">
+                <input
+                  type="number"
+                  name="score"
+                  class="form-control"
+                  min="0"
+                  max="100"
+                  required
+                />
+            </td>
+            <td>
+                <input type="text" name="comment" class="form-control" />
+            </td>
+            <td>
+                <input type="hidden" name="user_id" value="{{ p.user_id }}" />
+                <button type="submit" class="btn btn-sm btn-purple">Save</button>
+              </form>
+              {% else %}
+                <input type="number" class="form-control" value="✔" disabled />
+            </td>
+            <td>
+                <input type="text" class="form-control" value="Already Evaluated" disabled />
+            </td>
+            <td class="text-success font-weight-bold">Evaluated</td>
+              {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+
+    <!-- Footer -->
+    <footer class="text-center">© Copyright NaSCon '25 - Judge</footer>
+  </body>
+</html>

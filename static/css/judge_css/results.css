@@ -1,0 +1,217 @@
+body {
+  background: url(bg.PNG);
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  margin-top : 15vh;
+}
+.container mt-5{
+  min-width: 100vh;
+}
+
+nav {
+  height: 15vh;
+  background-color: white;
+}
+
+nav ul li a {
+  color: black;
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+  padding-top: 20px;
+  padding-right: 15px;
+}
+
+.navbar-brand img {
+  height: 9.5vh;
+}
+
+.navbar-brand {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+#registeration {
+  border: 2px solid black;
+  background: linear-gradient(to right, #6a1b9a, #512da8);
+  width: 130px;
+  transform: translateX(-1);
+  transform: translateY(-1);
+  transition: background 0.5s ease;
+  transition: border 0.5s ease;
+  transition: box-shadow 0.5s ease;
+  box-shadow: 5px 5px 5px black;
+}
+
+#registeration:hover {
+  background: #9781a0;
+  border: none;
+  box-shadow: none;
+}
+
+#registeration a {
+  color: white;
+  font-family: garamond;
+}
+
+.news-scroll-container {
+  background: linear-gradient(135deg, #602e76, #404040);
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 15vh;
+  color: white;
+  font-weight: bold;
+  overflow: hidden;
+  position: relative;
+}
+
+.scrolling-wrapper {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+}
+
+#scrolling-news {
+  display: inline-block;
+  padding-left: 100vw;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.footer_logo {
+  height: 9.5vh;
+}
+
+footer .container-fluid .row {
+  background-color: #e8e8e8;
+  border-top: 5px solid gray;
+}
+
+footer .container-fluid .row h4 {
+  font-family: garamond;
+  color: rgb(80, 80, 80);
+  font-weight: bolder;
+}
+
+footer .container-fluid .row p,
+.footer_nav {
+  font-family: garamond;
+  color: rgb(90, 90, 90);
+}
+
+footer .container-fluid .row .registeration {
+  border: 2px solid black;
+  background: linear-gradient(to right, #6a1b9a, #512da8);
+  width: 130px;
+  transition: background 0.5s ease;
+  transition: border 0.5s ease;
+  transition: box-shadow 0.5s ease;
+  box-shadow: 5px 5px 5px black;
+  height: 60px;
+}
+
+footer .container-fluid .row .registeration:hover {
+  background: #9781a0;
+  border: none;
+  box-shadow: none;
+}
+
+footer .container-fluid .row .registeration a:hover {
+  text-decoration: none;
+}
+
+.timer-container {
+  text-align: center;
+  padding: 20px;
+  color: white;
+  background: linear-gradient(135deg, #602e76, #404040);
+  margin-top: 10px;
+}
+
+.timer-container h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.timer-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-block select {
+  background-color: #333;
+  color: white;
+  border: 2px solid #6a1b9a;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1.5em;
+  width: 80px;
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.timer-block select:focus {
+  outline: none;
+  border-color: #512da8;
+}
+
+.timer-block span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  margin-top: 5px;
+}
+
+.start-button {
+  background: linear-gradient(to right, #6a1b9a, #512da8);
+  border: 2px solid black;
+  color: white;
+  padding: 10px 20px;
+  font-family: "Garamond", serif;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
+  box-shadow: 5px 5px 5px black;
+}
+
+.start-button:hover {
+  background: #9781a0;
+  border: none;
+  box-shadow: none;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 1vh;
+  color: white;
+  font-family: garamond;
+}
+
+select {
+  width: 50%;
+  border-radius: 10px;
+  padding: 1vw;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Admin Panel</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin_css/dashboard.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Admin Panel</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a href="{{ url_for('admin_dashboard') }}" class="active"
+                ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('Users') }}"
+                ><i class="fas fa-users"></i> Users</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('sponsors_admin') }}"
+                ><i class="fas fa-handshake"></i> Sponsors</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('organizers') }}l"
+                ><i class="fas fa-users-cog"></i> Organizers</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('judges') }}"
+                ><i class="fas fa-gavel"></i> Judges</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('venues') }}"
+                ><i class="fas fa-building"></i> Venues</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('events_admin') }}"
+                ><i class="fas fa-calendar-alt"></i> Events</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('payments') }}"
+                ><i class="fas fa-credit-card"></i> Payments</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('evaluations') }}"
+                ><i class="fas fa-edit"></i> Evaluations</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('accomodation') }}"
+                ><i class="fas fa-bed"></i> Accommodations</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="header">
+          <h1>Welcome to the Admin Dashboard</h1>
+          <div class="user-info">
+            <p>Hello, Admin</p>
+            <button class="logout-btn">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </div>
+        </header>
+
+        <h1>Stats</h1>
+        <section class="stats">
+          <div class="stat-card">
+            <h3>Total Users</h3>
+            <p>{{ total_users }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Sponsors</h3>
+            <p>{{ total_sponsors }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Events</h3>
+            <p>{{ total_events }}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total User Payments</h3>
+            <p>${{ total_payments }}</p>
+          </div>
+        </section>
+
+        <h1>Sponsor Funds</h1>
+        <div class="fund-card-grid">
+          <div class="fund-card platinum">
+            <h4>Platinum Funds</h4>
+            <p>Rs. {{ platinum_funds }}</p>
+          </div>
+          <div class="fund-card gold">
+            <h4>Gold Funds</h4>
+            <p>Rs. {{ gold_funds }}</p>
+          </div>
+          <div class="fund-card silver">
+            <h4>Silver Funds</h4>
+            <p>Rs. {{ silver_funds }}</p>
+          </div>
+          <div class="fund-card bronze">
+            <h4>Bronze Funds</h4>
+            <p>Rs. {{ bronze_funds }}</p>
+          </div>
+        </div>
+
+        <h1>Event Scheduling Conflicts</h1>
+        {% if conflicts %}
+          <div class="conflict-list">
+            <ul>
+              {% for conflict in conflicts %}
+                <li>
+                  <strong>{{ conflict.event1 }}</strong> and <strong>{{ conflict.event2 }}</strong> 
+                  are scheduled at <strong>{{ conflict.venue }}</strong> on 
+                  <strong>{{ conflict.event_date }}</strong> with overlapping times 
+                  ({{ conflict.start1 }}–{{ conflict.end1 }}, {{ conflict.start2 }}–{{ conflict.end2 }}).
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% else %}
+          <p>No scheduling conflicts detected 🎉</p>
+        {% endif %}
+        
+      </main>
+    </div>
+
+    <footer class="footer">&copy; 2024 DB_Project Admin Panel</footer>
+  </body>
+</html>

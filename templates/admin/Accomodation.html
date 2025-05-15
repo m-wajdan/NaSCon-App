@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accommodation Management</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin_css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Accommodation Management</h1>
+      <nav class="navbar">
+        <a
+          href="{{ url_for('admin_dashboard') }}"
+          class="text-blue-600 hover:underline"
+          >Dashboard</a
+        >
+        <a href="{{ url_for('Users') }}" class="text-blue-600 hover:underline"
+          >Users</a
+        >
+        <a
+          href="{{ url_for('sponsors_admin') }}"
+          class="text-blue-600 hover:underline"
+          >Sponsors</a
+        >
+        <a
+          href="{{ url_for('organizers') }}"
+          class="text-blue-600 hover:underline"
+          >Organizers</a
+        >
+        <a href="{{ url_for('judges') }}" class="text-blue-600 hover:underline"
+          >Judges</a
+        >
+        <a href="{{ url_for('venues') }}" class="text-blue-600 hover:underline"
+          >Venues</a
+        >
+        <a
+          href="{{ url_for('events_admin') }}"
+          class="text-blue-600 hover:underline"
+          >Events</a
+        >
+        <a
+          href="{{ url_for('payments') }}"
+          class="text-blue-600 hover:underline"
+          >Payments</a
+        >
+        <a
+          href="{{ url_for('evaluations') }}"
+          class="text-blue-600 hover:underline"
+          >Evaluations</a
+        >
+        <a
+          href="{{ url_for('accomodation') }}"
+          class="text-blue-600 hover:underline"
+          >Accommodations</a
+        >
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="table-section">
+        <h2>Accommodations List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Rent</th>
+              <th>Capacity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for acc in accomodations %}
+            <tr>
+              <td>{{acc.package}}</td>
+              <td>{{acc.rent}}</td>
+              <td>{{acc.capacity}}</td>
+              <td>
+                <form
+                  method="POST"
+                  action="{{ url_for('delete_accomodation', id=acc.room_no) }}"
+                  onsubmit="return confirm('Are you sure you want to delete this accommodation?');"
+                  style="display: inline"
+                >
+                  <button type="submit" class="delete">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+
+    <footer class="footer">&copy; 2024 DB_Project Admin Panel</footer>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sponsor Management</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin_css/sponsor.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      table {
+        width: 95%;
+        margin: 20px auto;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border: 1px solid #ccc;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f0f0f0;
+      }
+
+      button {
+        margin: 0 5px;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Sponsors Management</h1>
+      <nav class="navbar">
+        <a
+          href="{{ url_for('admin_dashboard') }}"
+          class="text-blue-600 hover:underline"
+          >Dashboard</a
+        >
+        <a href="{{ url_for('Users') }}" class="text-blue-600 hover:underline"
+          >Users</a
+        >
+        <a
+          href="{{ url_for('sponsors_admin') }}"
+          class="text-blue-600 hover:underline"
+          >Sponsors</a
+        >
+        <a
+          href="{{ url_for('organizers') }}"
+          class="text-blue-600 hover:underline"
+          >Organizers</a
+        >
+        <a href="{{ url_for('judges') }}" class="text-blue-600 hover:underline"
+          >Judges</a
+        >
+        <a href="{{ url_for('venues') }}" class="text-blue-600 hover:underline"
+          >Venues</a
+        >
+        <a
+          href="{{ url_for('events_admin') }}"
+          class="text-blue-600 hover:underline"
+          >Events</a
+        >
+        <a
+          href="{{ url_for('payments') }}"
+          class="text-blue-600 hover:underline"
+          >Payments</a
+        >
+        <a
+          href="{{ url_for('evaluations') }}"
+          class="text-blue-600 font-semibold underline"
+          >Evaluations</a
+        >
+        <a
+          href="{{ url_for('accomodation') }}"
+          class="text-blue-600 hover:underline"
+          >Accommodations</a
+        >
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="table-section">
+        <h2 style="margin: 20px">Sponsorship Requests</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Company</th>
+              <th>Email</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th>Representative</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for req in requests %}
+            <tr>
+              <td>{{ req.request_id }}</td>
+              <td>{{ req.company_name }}</td>
+              <td>{{ req.email }}</td>
+              <td>{{ req.amount }}</td>
+              <td>{{ req.sponsorship_category }}</td>
+              <td>{{ req.sponsor_representative_name }}</td>
+              <td>{{ req.status }}</td>
+              <td>
+                {% if req.status == 'pending' %}
+                <form
+                  method="post"
+                  action="{{ url_for('accept_request', request_id=req.request_id) }}"
+                  style="display: inline"
+                >
+                  <button type="submit">Accept</button>
+                </form>
+                <form
+                  method="post"
+                  action="{{ url_for('reject_request', request_id=req.request_id) }}"
+                  style="display: inline"
+                >
+                  <button type="submit">Reject</button>
+                </form>
+                {% else %}
+                <span style="color: grey">No Action</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer class="footer">&copy; 2024 DB_Project Admin Panel</footer>
+  </body>
+</html>
